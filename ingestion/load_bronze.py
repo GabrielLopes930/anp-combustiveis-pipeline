@@ -32,7 +32,8 @@ COLUNAS = {
 
 usuario = os.environ["POSTGRES_USER"]
 senha = os.environ["POSTGRES_PASSWORD"]
-engine = create_engine(f"postgresql+psycopg://{usuario}:{senha}@localhost:5432/anp")
+host = os.environ.get("POSTGRES_HOST", "localhost")
+engine = create_engine(f"postgresql+psycopg://{usuario}:{senha}@{host}:5432/anp")
 
 for nome in SOURCES:
     arquivo = RAW_DIR / f"{nome}.csv"
