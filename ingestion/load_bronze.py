@@ -35,9 +35,10 @@ senha = os.environ["POSTGRES_PASSWORD"]
 host = os.environ.get("POSTGRES_HOST", "localhost")
 engine = create_engine(f"postgresql+psycopg://{usuario}:{senha}@{host}:5432/anp")
 
-for nome in SOURCES:
-    arquivo = RAW_DIR / f"{nome}.csv"
+arquivos = [RAW_DIR / f"{nome}.csv" for nome in SOURCES]
+arquivos += sorted(RAW_DIR.glob("ultimas-4-semanas_*.csv"))
 
+for arquivo in arquivos:
     if not arquivo.exists():
         print(f"arquivo não encontrado, rode o download antes: {arquivo}")
         continue

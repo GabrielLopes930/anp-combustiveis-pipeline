@@ -18,3 +18,6 @@ CREATE TABLE IF NOT EXISTS bronze.precos_combustiveis (
     arquivo_origem  TEXT NOT NULL,
     carregado_em    TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+CREATE INDEX IF NOT EXISTS idx_bronze_arquivo_origem
+    ON bronze.precos_combustiveis (arquivo_origem);
